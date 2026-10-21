@@ -1,15 +1,11 @@
+import React from "react";
+
 export default function Divider({ className = "" }: { className?: string }) {
   return (
-    <svg
-      aria-hidden
-      viewBox="0 0 200 12"
-      className={`mx-auto h-3 w-48 text-rose-ink ${className}`}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1"
-    >
-      <path d="M0 6h82M118 6h82" />
-      <path d="M86 6c4-6 8-6 14 0 6-6 10-6 14 0-4 6-8 6-14 0-6 6-10 6-14 0z" />
-    </svg>
+    <div className={`flex items-center justify-center gap-3 my-4 ${className}`}>
+      <div className="h-px w-16 sm:w-24 bg-gradient-to-r from-transparent via-[#bfa15f]/60 to-[#bfa15f]" />
+      <span className="text-[#bfa15f] text-sm">✦</span>
+      <div className="h-px w-16 sm:w-24 bg-gradient-to-l from-transparent via-[#bfa15f]/60 to-[#bfa15f]" />
+    </div>
   );
 }

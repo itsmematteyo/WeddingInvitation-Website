@@ -1,33 +1,62 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------
-   Design tokens
-   Colors were sampled from the Canva design screenshots, so they are
-   close approximations. Replace with exact Canva hex values if needed.
+   Luxury Wedding Design System
+   Palette inspired by Dusty Rose, Warm Blush, Cocoa Ink & Champagne Gold
 ------------------------------------------------------------------- */
 :root {
-  --rose: #dcb4b4;       /* solid sections: details, dress code, RSVP, bands */
-  --blush: #fcf4f0;      /* base of the watercolor sections */
-  --blush-deep: #fcece4; /* soft cloud washes */
-  --rose-ink: #904843;   /* headings on rose sections */
-  --rose-soft: #b46760;  /* sponsor names, secondary text */
-  --cocoa: #5f301b;      /* hero names, invitation text */
+  --rose: #d9aba6;
+  --rose-soft: #c38f89;
+  --rose-deep: #a66a64;
+  --rose-ink: #783832;
+  --rose-dark: #5a2722;
+
+  --blush: #fdf8f5;
+  --blush-warm: #f7ebe4;
+  --blush-deep: #f0ddd3;
+  --blush-card: rgba(255, 255, 255, 0.78);
+
+  --cocoa: #3d2119;
+  --cocoa-light: #664338;
+  --cocoa-muted: #8b685e;
+
+  --gold: #bfa15f;
+  --gold-light: #e0ca92;
+  --gold-deep: #947738;
+  --gold-glow: rgba(191, 161, 95, 0.25);
+
+  --cream: #fcfbfa;
 }
 
-/* Expose the tokens to Tailwind: bg-rose, text-rose-ink, font-script, ... */
 @theme inline {
   --color-rose: var(--rose);
-  --color-blush: var(--blush);
-  --color-blush-deep: var(--blush-deep);
-  --color-rose-ink: var(--rose-ink);
   --color-rose-soft: var(--rose-soft);
-  --color-cocoa: var(--cocoa);
+  --color-rose-deep: var(--rose-deep);
+  --color-rose-ink: var(--rose-ink);
+  --color-rose-dark: var(--rose-dark);
 
+  --color-blush: var(--blush);
+  --color-blush-warm: var(--blush-warm);
+  --color-blush-deep: var(--blush-deep);
+  --color-blush-card: var(--blush-card);
+
+  --color-cocoa: var(--cocoa);
+  --color-cocoa-light: var(--cocoa-light);
+  --color-cocoa-muted: var(--cocoa-muted);
+
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-deep: var(--gold-deep);
+
+  --font-serif: var(--font-serif);
+  --font-cormorant: var(--font-cormorant);
   --font-script: var(--font-great-vibes);
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
 }
 
 /* ------------------------------------------------------------------
-   Base
+   Base Styling & Typography
 ------------------------------------------------------------------- */
 html {
   scroll-behavior: smooth;
@@ -40,31 +69,316 @@ html {
 }
 
 body {
-  background: var(--blush);
+  background-color: var(--blush);
   color: var(--cocoa);
   font-family: var(--font-serif), Georgia, serif;
-  line-height: 1.6;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 /* ------------------------------------------------------------------
-   Section backgrounds
+   Atmospheric Textures & Gradients
 ------------------------------------------------------------------- */
-
-/* Solid dusty rose band */
-.bg-section-rose {
-  background-color: var(--rose);
-  color: var(--rose-ink);
-}
-
-/* Watercolor: blush base with soft peach clouds in the corners,
-   like the Canva design. Pure CSS, so it loads instantly and stays
-   sharp at any size. */
 .bg-watercolor {
   background-color: var(--blush);
   background-image:
-    radial-gradient(ellipse 40% 32% at 6% 10%, var(--blush-deep), transparent 72%),
-    radial-gradient(ellipse 32% 28% at 94% 6%, #f4dcd0, transparent 70%),
-    radial-gradient(ellipse 36% 30% at 92% 90%, #f4dcd0, transparent 70%),
-    radial-gradient(ellipse 42% 32% at 4% 94%, var(--blush-deep), transparent 72%);
+    radial-gradient(circle at 10% 12%, rgba(247, 235, 228, 0.95), transparent 55%),
+    radial-gradient(circle at 92% 8%, rgba(240, 221, 211, 0.85), transparent 50%),
+    radial-gradient(circle at 88% 88%, rgba(235, 210, 198, 0.75), transparent 52%),
+    radial-gradient(circle at 6% 92%, rgba(245, 230, 222, 0.85), transparent 55%),
+    radial-gradient(circle at 50% 50%, rgba(191, 161, 95, 0.05) 1.5px, transparent 1.5px),
+    linear-gradient(to right, rgba(217, 171, 166, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(217, 171, 166, 0.035) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 36px 36px, 72px 72px, 72px 72px;
 }
+
+.bg-linen {
+  background-color: #faf5f0;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(217, 171, 166, 0.08), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(191, 161, 95, 0.06), transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(191, 161, 95, 0.04) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 32px 32px;
+}
+
+.bg-section-rose {
+  background: linear-gradient(135deg, #dfb7b1 0%, #d4a59f 50%, #c8958e 100%);
+  color: var(--rose-ink);
+}
+
+.bg-section-blush {
+  background: linear-gradient(180deg, #fdf8f5 0%, #f7ebe4 100%);
+}
+
+/* ------------------------------------------------------------------
+   Luxury Stationery & Card Effects (Embossed Debossed Groove)
+------------------------------------------------------------------- */
+.luxury-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(191, 161, 95, 0.3);
+  box-shadow:
+    inset 0 0 0 2.5px rgba(253, 248, 245, 0.9),
+    inset 0 0 0 3.5px rgba(191, 161, 95, 0.2),
+    0 10px 30px -10px rgba(120, 56, 50, 0.09),
+    0 2px 6px -1px rgba(0, 0, 0, 0.02);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luxury-card:hover {
+  border-color: rgba(191, 161, 95, 0.55);
+  box-shadow:
+    inset 0 0 0 2.5px rgba(253, 248, 245, 0.95),
+    inset 0 0 0 4px rgba(191, 161, 95, 0.35),
+    0 18px 45px -12px rgba(120, 56, 50, 0.15);
+}
+
+.gold-border {
+  border: 1px solid rgba(191, 161, 95, 0.35);
+}
+
+.double-gold-border {
+  position: relative;
+  border: 1px solid rgba(191, 161, 95, 0.4);
+}
+
+.double-gold-border::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(191, 161, 95, 0.25);
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------
+   Text Gradients & Accents
+------------------------------------------------------------------- */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #8a6a2a 0%, #bfa15f 40%, #e0ca92 70%, #9e7a33 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-rose-gradient {
+  background: linear-gradient(135deg, #5a2722 0%, #783832 50%, #a66a64 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ------------------------------------------------------------------
+   Custom Scrollbar
+------------------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--blush);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--rose-soft);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--rose-deep);
+}
+
+/* ------------------------------------------------------------------
+   Animations
+------------------------------------------------------------------- */
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1.5deg);
+  }
+}
+
+@keyframes pulseSubtle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.88;
+    transform: scale(0.985);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-float {
+  animation: floatGentle 6s ease-in-out infinite;
+}
+
+.animate-pulse-subtle {
+  animation: pulseSubtle 3s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------------
+   3D Realistic Petal Falling Physics
+------------------------------------------------------------------- */
+.petal-3d-viewport {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+@keyframes petalTumble1 {
+  0% {
+    transform: translate3d(0, -12vh, 0) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    opacity: 0;
+  }
+  6% {
+    opacity: 0.96;
+  }
+  50% {
+    transform: translate3d(calc(var(--sway-x) * 0.75), 50vh, 50px) rotateX(180deg) rotateY(120deg) rotateZ(180deg);
+    opacity: 0.96;
+  }
+  92% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(var(--sway-x), 112vh, -40px) rotateX(360deg) rotateY(240deg) rotateZ(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes petalTumble2 {
+  0% {
+    transform: translate3d(0, -12vh, 0) rotateX(45deg) rotateY(20deg) rotateZ(15deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.94;
+  }
+  48% {
+    transform: translate3d(calc(var(--sway-x) * -0.8), 48vh, 70px) rotateX(150deg) rotateY(210deg) rotateZ(90deg);
+    opacity: 0.94;
+  }
+  90% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(var(--sway-x), 112vh, -30px) rotateX(315deg) rotateY(390deg) rotateZ(280deg);
+    opacity: 0;
+  }
+}
+
+@keyframes petalTumble3 {
+  0% {
+    transform: translate3d(0, -12vh, 0) rotateX(-35deg) rotateY(60deg) rotateZ(-25deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.96;
+  }
+  52% {
+    transform: translate3d(calc(var(--sway-x) * 1.1), 52vh, -60px) rotateX(165deg) rotateY(130deg) rotateZ(145deg);
+    opacity: 0.96;
+  }
+  90% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(calc(var(--sway-x) * 0.5), 112vh, 45px) rotateX(345deg) rotateY(310deg) rotateZ(330deg);
+    opacity: 0;
+  }
+}
+
+.petal-anim-1 {
+  animation-name: petalTumble1;
+  animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+.petal-anim-2 {
+  animation-name: petalTumble2;
+  animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+.petal-anim-3 {
+  animation-name: petalTumble3;
+  animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+/* ------------------------------------------------------------------
+   Web Page Scroll Entrance Animations
+------------------------------------------------------------------- */
+.scroll-animate {
+  opacity: 0;
+  transition-property: opacity, transform, filter;
+  transition-duration: 0.9s;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* Directions */
+.scroll-fade-up {
+  transform: translateY(50px);
+}
+
+.scroll-fade-down {
+  transform: translateY(-40px);
+}
+
+.scroll-fade-left {
+  transform: translateX(60px);
+}
+
+.scroll-fade-right {
+  transform: translateX(-60px);
+}
+
+.scroll-zoom-in {
+  transform: scale(0.88);
+}
+
+.scroll-flip-in {
+  transform: perspective(800px) rotateX(18deg) translateY(35px);
+}
+
+.scroll-expand-line {
+  transform: scaleX(0);
+  transform-origin: center;
+}
+
+/* Stagger Delays */
+.scroll-delay-75 { transition-delay: 75ms; }
+.scroll-delay-100 { transition-delay: 100ms; }
+.scroll-delay-150 { transition-delay: 150ms; }
+.scroll-delay-200 { transition-delay: 200ms; }
+.scroll-delay-300 { transition-delay: 300ms; }
+.scroll-delay-400 { transition-delay: 400ms; }
+.scroll-delay-500 { transition-delay: 500ms; }
+.scroll-delay-600 { transition-delay: 600ms; }
+
+/* Triggered State */
+.scroll-animate.is-visible {
+  opacity: 1 !important;
+  transform: translateY(0) translateX(0) scale(1) rotateX(0deg) !important;
+}
+
+.scroll-expand-line.is-visible {
+  transform: scaleX(1) !important;
+}
+
+
+

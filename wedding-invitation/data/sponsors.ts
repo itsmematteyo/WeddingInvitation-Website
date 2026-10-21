@@ -1,10 +1,11 @@
-// Spellings were read from the Canva screenshots, so double-check them.
+// Entourage Data for Kelvin & Janine's Nuptial
+
 export const parents = {
   groom: ["Mr. Gaudencio Arellano", "Mrs. Amor Arellano"],
   bride: ["Mr. Jimmy Consulta", "Mrs. Jocelyn Consulta"],
 };
 
-// Each row pairs a male and female sponsor.
+// Principal Sponsors (Godparents / Witnesses to Sacred Vows)
 export const principalSponsors: { male: string; female: string }[] = [
   { male: "Mr. Bernardo Eseo", female: "Mrs. Myrna Felix" },
   { male: "Mr. Meljune Foster", female: "Mrs. Helen Lagurin" },
@@ -29,14 +30,39 @@ export const secondary = {
     "Ms. Rica Mae Titular",
     "Ms. Tricia Arellano",
   ],
-  candle: ["Mr. Ricky Apolonio", "Ms. Laarni Villosis"],
-  veil: ["Mr. Jay Arellano", "Ms. Guene Lyn Arellano"],
-  cord: ["Mr. Karl Tolentino", "Ms. Audrey Luna"],
+  candle: {
+    description: "To light our path toward Christ",
+    names: ["Mr. Ricky Apolonio", "Ms. Laarni Villosis"],
+  },
+  veil: {
+    description: "To clothe us in purity and unity",
+    names: ["Mr. Jay Arellano", "Ms. Guene Lyn Arellano"],
+  },
+  cord: {
+    description: "To bind our hearts in eternal covenant",
+    names: ["Mr. Karl Tolentino", "Ms. Audrey Luna"],
+  },
   bearers: [
-    { role: "To carry our symbol of Love", names: ["Jacob Sebastian Luna"] },
-    { role: "To carry our symbol of Treasure", names: ["King Nathaniel Titular"] },
-    { role: "To carry our symbol of Faith", names: ["Carlos Jose Arellano"] },
+    {
+      role: "Ring Bearer",
+      symbol: "To carry our symbol of Love",
+      names: ["Jacob Sebastian Luna"],
+    },
+    {
+      role: "Coin Bearer",
+      symbol: "To carry our symbol of Treasure",
+      names: ["King Nathaniel Titular"],
+    },
+    {
+      role: "Bible Bearer",
+      symbol: "To carry our symbol of Faith",
+      names: ["Carlos Jose Arellano"],
+    },
   ],
   miniGroom: "Ayaan Gabriel Mirante",
-  flowerGirls: ["Caleigh Arellano", "Jamina Ysabel Luna", "Bridgette Kae Arellano"],
+  flowerGirls: {
+    role: "Flower Girls",
+    symbol: "To shower our aisle with blossoms and joy",
+    names: ["Caleigh Arellano", "Jamina Ysabel Luna", "Bridgette Kae Arellano"],
+  },
 };
