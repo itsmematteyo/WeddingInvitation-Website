@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Design tokens
+   Colors were sampled from the Canva design screenshots, so they are
+   close approximations. Replace with exact Canva hex values if needed.
+------------------------------------------------------------------- */
+:root {
+  --rose: #dcb4b4;       /* solid sections: details, dress code, RSVP, bands */
+  --blush: #fcf4f0;      /* base of the watercolor sections */
+  --blush-deep: #fcece4; /* soft cloud washes */
+  --rose-ink: #904843;   /* headings on rose sections */
+  --rose-soft: #b46760;  /* sponsor names, secondary text */
+  --cocoa: #5f301b;      /* hero names, invitation text */
+}
+
+/* Expose the tokens to Tailwind: bg-rose, text-rose-ink, font-script, ... */
+@theme inline {
+  --color-rose: var(--rose);
+  --color-blush: var(--blush);
+  --color-blush-deep: var(--blush-deep);
+  --color-rose-ink: var(--rose-ink);
+  --color-rose-soft: var(--rose-soft);
+  --color-cocoa: var(--cocoa);
+
+  --font-script: var(--font-great-vibes);
+}
+
+/* ------------------------------------------------------------------
+   Base
+------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--blush);
+  color: var(--cocoa);
+  font-family: var(--font-serif), Georgia, serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ------------------------------------------------------------------
+   Section backgrounds
+------------------------------------------------------------------- */
+
+/* Solid dusty rose band */
+.bg-section-rose {
+  background-color: var(--rose);
+  color: var(--rose-ink);
+}
+
+/* Watercolor: blush base with soft peach clouds in the corners,
+   like the Canva design. Pure CSS, so it loads instantly and stays
+   sharp at any size. */
+.bg-watercolor {
+  background-color: var(--blush);
+  background-image:
+    radial-gradient(ellipse 40% 32% at 6% 10%, var(--blush-deep), transparent 72%),
+    radial-gradient(ellipse 32% 28% at 94% 6%, #f4dcd0, transparent 70%),
+    radial-gradient(ellipse 36% 30% at 92% 90%, #f4dcd0, transparent 70%),
+    radial-gradient(ellipse 42% 32% at 4% 94%, var(--blush-deep), transparent 72%);
+}
