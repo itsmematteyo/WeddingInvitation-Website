@@ -52,9 +52,9 @@ export default function LoveStory() {
           </div>
 
           {/* Timeline Grid */}
-          <div className="mt-14 grid gap-12 lg:grid-cols-[1fr_1.1fr] items-start">
+          <div className="mt-14 grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-14 items-start">
             {/* Couple Feature Frame */}
-            <div className="order-2 lg:order-1 flex justify-center lg:sticky lg:top-28">
+            <div className="order-2 lg:order-1 flex justify-center lg:sticky lg:top-28 mt-8 sm:mt-10 lg:mt-0 pt-2 lg:pt-0">
               <div className="w-full max-w-lg">
                 <ScrollReveal animation="fade-right" delayMs={150}>
                   <PhotoFrame
@@ -62,7 +62,7 @@ export default function LoveStory() {
                     alt="Kelvin and Janine sitting together under the evening sky"
                     label="Kelvin & Janine"
                     caption="Two Hearts United by Grace"
-                    className="aspect-[3/4] min-h-[460px] sm:min-h-[560px]"
+                    className="aspect-[3/4] min-h-[360px] sm:min-h-[460px] lg:min-h-[560px]"
                     shape="arch"
                     objectPosition="object-[center_20%]"
                   />
@@ -71,7 +71,7 @@ export default function LoveStory() {
             </div>
 
             {/* Milestone Story Steps */}
-            <div className="order-1 lg:order-2 space-y-6">
+            <div className="order-1 lg:order-2 space-y-6 mb-6 lg:mb-0">
               {wedding.loveStory.map((chapter, index) => (
                 <ScrollReveal
                   key={chapter.title}
