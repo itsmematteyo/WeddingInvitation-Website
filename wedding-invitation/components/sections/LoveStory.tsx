@@ -52,18 +52,19 @@ export default function LoveStory() {
           </div>
 
           {/* Timeline Grid */}
-          <div className="mt-14 grid gap-12 lg:grid-cols-[1fr_1.1fr] items-center">
+          <div className="mt-14 grid gap-12 lg:grid-cols-[1fr_1.1fr] items-start">
             {/* Couple Feature Frame */}
-            <div className="order-2 lg:order-1 flex justify-center">
-              <div className="w-full max-w-md">
+            <div className="order-2 lg:order-1 flex justify-center lg:sticky lg:top-28">
+              <div className="w-full max-w-lg">
                 <ScrollReveal animation="fade-right" delayMs={150}>
                   <PhotoFrame
-                    src="/images/image-test.jpg"
-                    alt="Kelvin and Janine"
+                    src="/images/image-10.jpg"
+                    alt="Kelvin and Janine sitting together under the evening sky"
                     label="Kelvin & Janine"
                     caption="Two Hearts United by Grace"
-                    className="aspect-[16/10]"
+                    className="aspect-[3/4] min-h-[460px] sm:min-h-[560px]"
                     shape="arch"
+                    objectPosition="object-[center_20%]"
                   />
                 </ScrollReveal>
               </div>

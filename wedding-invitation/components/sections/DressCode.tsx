@@ -13,14 +13,44 @@ export default function DressCode() {
   const [showGiftDetails, setShowGiftDetails] = useState(false);
   const [copiedAccount, setCopiedAccount] = useState(false);
 
+  const copyText = async (text: string) => {
+    try {
+      if (typeof navigator !== "undefined" && navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+    } catch {
+      // Fall through to textarea fallback
+    }
+
+    try {
+      if (typeof document !== "undefined") {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-9999px";
+        textArea.style.top = "-9999px";
+        textArea.setAttribute("readonly", "");
+        document.body.appendChild(textArea);
+        textArea.select();
+        const success = document.execCommand("copy");
+        document.body.removeChild(textArea);
+        return success;
+      }
+    } catch {
+      return false;
+    }
+    return false;
+  };
+
   const copyToClipboard = (hex: string) => {
-    navigator.clipboard.writeText(hex);
+    copyText(hex);
     setCopiedHex(hex);
     setTimeout(() => setCopiedHex(null), 2000);
   };
 
   const copyGcash = () => {
-    navigator.clipboard.writeText(wedding.giftNote.bankInfo.gcashNumber);
+    copyText(wedding.giftNote.bankInfo.gcashNumber);
     setCopiedAccount(true);
     setTimeout(() => setCopiedAccount(false), 2000);
   };

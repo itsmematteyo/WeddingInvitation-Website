@@ -61,15 +61,16 @@ export default function InvitationMessage() {
               </ScrollReveal>
 
               {/* Featured Couple Photo Frame */}
-              <div className="mt-8 mx-auto max-w-sm">
+              <div className="mt-8 mx-auto w-full max-w-md sm:max-w-lg md:max-w-xl">
                 <ScrollReveal animation="zoom-in" delayMs={300}>
                   <PhotoFrame
-                    src="/images/image-test.jpg"
+                    src="/images/image-1.jpg"
                     alt="Kelvin and Janine"
                     label="Kelvin & Janine"
                     caption="Together in Holy Matrimony"
-                    className="aspect-[16/10]"
-                    shape="arch"
+                    className="aspect-[3/2] min-h-[260px] sm:min-h-[340px] md:min-h-[380px]"
+                    shape="soft-arch"
+                    objectPosition="object-center"
                   />
                 </ScrollReveal>
               </div>

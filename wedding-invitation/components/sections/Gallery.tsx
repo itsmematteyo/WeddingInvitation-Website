@@ -5,56 +5,68 @@ import ScriptHeading from "@/components/ui/ScriptHeading";
 import PhotoFrame from "@/components/ui/PhotoFrame";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { FloralCornerGarland } from "@/components/ui/FloralBorders";
-import { X } from "lucide-react";
+import { X, ZoomIn } from "lucide-react";
 
 const photos = [
   {
     id: 1,
-    src: "/images/image-test.jpg",
-    alt: "Kelvin and Janine",
+    src: "/images/image-4.jpg",
+    alt: "Kelvin and Janine walking under evening lights",
     caption: "Until I found you — Stephen Sanchez",
     shape: "rectangle" as const,
-    label: "Kelvin & Janine",
+    label: "Evening Glow",
+    aspect: "aspect-[3/2] min-h-[240px] sm:min-h-[280px]",
+    objectPosition: "object-center",
   },
   {
     id: 2,
-    src: "/images/image-test.jpg",
-    alt: "Kelvin and Janine holding hands",
+    src: "/images/image-5.jpg",
+    alt: "Kelvin and Janine by the garden resort",
     caption: "Hand in hand towards tomorrow",
-    shape: "arch" as const,
+    shape: "soft-arch" as const,
     label: "By Grace",
+    aspect: "aspect-[3/2] min-h-[240px] sm:min-h-[280px]",
+    objectPosition: "object-[center_20%]",
   },
   {
     id: 3,
-    src: "/images/image-test.jpg",
-    alt: "Kelvin and Janine engagement moment",
+    src: "/images/image-7.jpg",
+    alt: "Kelvin and Janine embracing amidst lush trees",
     caption: "The promise of a lifetime",
     shape: "rectangle" as const,
     label: "Our Yes",
+    aspect: "aspect-[3/2] min-h-[240px] sm:min-h-[280px]",
+    objectPosition: "object-center",
   },
   {
     id: 4,
-    src: "/images/image-test.jpg",
-    alt: "Kelvin and Janine walking together",
+    src: "/images/image-8.jpg",
+    alt: "Kelvin and Janine along the cobblestone path",
     caption: "In God's perfect timing",
-    shape: "arch" as const,
+    shape: "soft-arch" as const,
     label: "Two Hearts",
+    aspect: "aspect-[3/2] min-h-[240px] sm:min-h-[280px]",
+    objectPosition: "object-[center_25%]",
   },
   {
     id: 5,
-    src: "/images/image-test.jpg",
-    alt: "Kelvin and Janine laughter and joy",
+    src: "/images/image-6.jpg",
+    alt: "Kelvin and Janine close embrace and laughter",
     caption: "Joy that overflows",
     shape: "rectangle" as const,
     label: "Shared Joy",
+    aspect: "aspect-[3/2] min-h-[240px] sm:min-h-[280px]",
+    objectPosition: "object-[center_20%]",
   },
   {
     id: 6,
-    src: "/images/image-test.jpg",
-    alt: "Kelvin and Janine sweet embrace",
+    src: "/images/image-3.jpg",
+    alt: "Kelvin and Janine hand with engagement ring",
     caption: "December 29, 2026",
-    shape: "arch" as const,
+    shape: "soft-arch" as const,
     label: "Pure Love",
+    aspect: "aspect-[3/2] min-h-[240px] sm:min-h-[280px]",
+    objectPosition: "object-center",
   },
 ];
 
@@ -99,7 +111,7 @@ export default function Gallery() {
           </ScrollReveal>
 
           {/* Gallery Grid */}
-          <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6">
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {photos.map((photo, idx) => (
               <ScrollReveal
                 key={photo.id}
@@ -108,7 +120,8 @@ export default function Gallery() {
               >
                 <div
                   onClick={() => setSelectedPhoto(photo)}
-                  className="cursor-pointer transition-transform hover:scale-[1.02]"
+                  className="cursor-pointer transition-transform duration-300 hover:scale-[1.02] group/item relative"
+                  title="Click to view full photo"
                 >
                   <PhotoFrame
                     src={photo.src}
@@ -116,8 +129,15 @@ export default function Gallery() {
                     label={photo.label}
                     caption={photo.caption}
                     shape={photo.shape}
-                    className="aspect-[4/3]"
+                    className={photo.aspect}
+                    objectPosition={photo.objectPosition}
                   />
+
+                  {/* Subtle hover expand pill */}
+                  <div className="pointer-events-none absolute bottom-4 right-4 z-10 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/60 text-white/90 text-[11px] font-display uppercase tracking-wider backdrop-blur-sm opacity-0 group-hover/item:opacity-100 transition-opacity duration-300 shadow-md">
+                    <ZoomIn className="w-3.5 h-3.5 text-[#e0ca92]" />
+                    <span>View</span>
+                  </div>
                 </div>
               </ScrollReveal>
             ))}
@@ -131,37 +151,38 @@ export default function Gallery() {
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-[120] flex items-center justify-center bg-black/80 p-4 backdrop-blur-md animate-in fade-in duration-200"
+          className="fixed inset-0 z-[120] flex items-center justify-center bg-black/85 p-3 sm:p-6 backdrop-blur-md animate-in fade-in duration-200"
           onClick={() => setSelectedPhoto(null)}
         >
           <div
-            className="relative max-w-lg w-full rounded-3xl bg-[#fdf8f5] p-6 shadow-2xl border border-[#bfa15f]/50"
+            className="relative max-w-4xl w-full rounded-3xl bg-[#fdf8f5] p-5 sm:p-8 shadow-2xl border-2 border-[#bfa15f]/60 max-h-[92vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={() => setSelectedPhoto(null)}
-              className="absolute top-4 right-4 h-9 w-9 rounded-full bg-[#f7ebe4] text-[#783832] flex items-center justify-center hover:bg-[#783832] hover:text-white transition-colors"
+              className="absolute top-4 right-4 z-20 h-10 w-10 rounded-full bg-white/90 text-[#783832] border border-[#bfa15f]/40 flex items-center justify-center hover:bg-[#783832] hover:text-white transition-all shadow-md"
               aria-label="Close photo preview"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="mt-2">
+            <div className="mt-1">
               <PhotoFrame
                 src={selectedPhoto.src}
                 alt={selectedPhoto.alt}
                 label={selectedPhoto.label}
                 caption={selectedPhoto.caption}
-                shape={selectedPhoto.shape}
-                className="aspect-[4/3]"
+                shape="rectangle"
+                className="aspect-[3/2] max-h-[70vh] w-full"
+                objectPosition={selectedPhoto.objectPosition}
               />
             </div>
 
-            <div className="mt-4 text-center">
-              <h4 className="font-cormorant text-2xl font-semibold text-[#783832]">
+            <div className="mt-5 text-center">
+              <h4 className="font-cormorant text-2xl sm:text-3xl font-semibold text-[#783832]">
                 {selectedPhoto.label}
               </h4>
-              <p className="font-serif text-sm text-[#664338] mt-1 italic">
+              <p className="font-serif text-sm sm:text-base text-[#664338] mt-1.5 italic">
                 {selectedPhoto.caption}
               </p>
             </div>

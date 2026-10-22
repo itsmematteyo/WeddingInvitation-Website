@@ -9,7 +9,7 @@ import PhotoFrame from "@/components/ui/PhotoFrame";
 import { Calendar, MapPin, ChevronDown } from "lucide-react";
 
 // Featured couple image in public/images
-const HERO_SRC: string | null = "/images/image-test.jpg";
+const HERO_SRC: string | null = "/images/image-2.jpg";
 
 export default function Hero() {
   const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding+of+Kelvin+and+Janine&dates=20261229T013000Z/20261229T080000Z&details=In+God%27s+Perfect+Time.+Kelvin+Arellano+and+Janine+Consulta+Nuptial+Ceremony+at+San+Pablo+Cathedral+Church+and+Reception+at+Golden+Rich.&location=San+Pablo+Cathedral+Church%2C+San+Pablo+City`;
@@ -19,17 +19,19 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex flex-col items-center justify-between overflow-hidden bg-watercolor pt-28 pb-12 px-4 sm:px-6"
     >
-      {/* Subtle ambient background wash if image is available */}
+      {/* Ambient background wash - couple photo visible with complimentary transparency */}
       {HERO_SRC && (
-        <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <Image
             src={HERO_SRC}
-            alt="Kelvin and Janine"
+            alt="Kelvin and Janine background"
             fill
             priority
-            className="object-cover object-center blur-sm scale-105"
+            className="object-cover object-center scale-105 opacity-35 sm:opacity-40 filter contrast-[1.02]"
           />
-          <div className="absolute inset-0 bg-[#fdf8f5]/80" />
+          {/* Soft tint overlay allowing the photo to show through while preserving typography readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#fdf8f5]/65 via-[#fdf8f5]/50 to-[#fdf8f5]/75" />
+          <div className="absolute inset-0 bg-watercolor mix-blend-soft-light opacity-50" />
         </div>
       )}
 

@@ -7,7 +7,9 @@ type Props = {
   label?: string;
   caption?: string;
   className?: string;
-  shape?: "arch" | "rectangle" | "oval";
+  shape?: "arch" | "rectangle" | "oval" | "soft-arch";
+  objectPosition?: string;
+  priority?: boolean;
 };
 
 export default function PhotoFrame({
@@ -17,21 +19,28 @@ export default function PhotoFrame({
   caption,
   className = "aspect-[3/4]",
   shape = "arch",
+  objectPosition = "object-center",
+  priority = false,
 }: Props) {
   // Always default to test-image if src is empty or null
   const imageSrc = src || "/images/image-test.jpg";
 
   const shapeClass = {
     arch: "rounded-t-full rounded-b-2xl",
-    rectangle: "rounded-2xl",
+    "soft-arch": "rounded-t-[3rem] sm:rounded-t-[4rem] rounded-b-2xl",
+    rectangle: "rounded-2xl sm:rounded-3xl",
     oval: "rounded-full",
   }[shape];
 
   return (
-    <div className="group relative">
+    <div className="group relative w-full">
       {/* Outer gilded border */}
       <div
-        className={`relative p-2.5 sm:p-3 bg-white/70 shadow-md backdrop-blur-sm border border-[#bfa15f]/40 ${shapeClass} transition-transform duration-500 group-hover:-translate-y-1`}
+        className={`relative p-2.5 sm:p-3 bg-white/80 shadow-lg backdrop-blur-sm border border-[#bfa15f]/40 ${shapeClass} transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-xl`}
+        style={{
+          boxShadow:
+            "0 15px 35px -10px rgba(120, 56, 50, 0.15), 0 0 0 1px rgba(191, 161, 95, 0.25)",
+        }}
       >
         <div
           className={`relative w-full overflow-hidden border border-[#bfa15f]/25 bg-gradient-to-b from-[#fdf8f5] to-[#f4ded4] ${className} ${shapeClass}`}
@@ -41,8 +50,9 @@ export default function PhotoFrame({
               src={imageSrc}
               alt={alt}
               fill
-              sizes="(min-width: 768px) 50vw, 100vw"
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              priority={priority}
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className={`object-cover transition-transform duration-700 group-hover:scale-105 ${objectPosition}`}
             />
           ) : (
             <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center select-none">
