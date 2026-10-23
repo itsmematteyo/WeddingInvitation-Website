@@ -8,7 +8,7 @@ import { FloralCornerGarland } from "@/components/ui/FloralBorders";
 import confetti from "canvas-confetti";
 import {
   Check,
-  MessageCircle,
+  Heart,
   HelpCircle,
   ChevronDown,
   Clock,
@@ -26,6 +26,7 @@ export default function Rsvp() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   useEffect(() => {
@@ -45,38 +46,60 @@ export default function Rsvp() {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name.trim()) return;
+    if (!formData.name.trim() || isSubmitting) return;
 
-    // Trigger celebratory confetti
+    setIsSubmitting(true);
+
+    const payload = {
+      name: formData.name.trim(),
+      attending:
+        formData.attending === "attending"
+          ? "Joyfully Attending"
+          : "Regretfully Declining",
+      guests:
+        formData.attending === "declining"
+          ? 0
+          : parseInt(formData.guests, 10) || 1,
+      phone: formData.phone.trim() || "N/A",
+      timestamp: new Date().toISOString(),
+    };
+
+    // 1. Post to API route which syncs directly with the Google Spreadsheet
     try {
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ["#d9aba6", "#bfa15f", "#783832", "#f7ebe4"],
+      await fetch("/api/rsvp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
       });
-    } catch {
-      // ignore
-    }
+    } catch (err) {
+      console.warn("Could not sync with Google Spreadsheet endpoint:", err);
+    } finally {
+      // 2. Trigger celebratory confetti
+      try {
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ["#d9aba6", "#bfa15f", "#783832", "#f7ebe4"],
+        });
+      } catch {
+        // ignore
+      }
 
-    setSubmitted(true);
-    localStorage.setItem("kelvin_janine_rsvp", JSON.stringify(formData));
+      // 3. Mark response as submitted and save locally
+      setSubmitted(true);
+      setIsSubmitting(false);
+      localStorage.setItem("kelvin_janine_rsvp", JSON.stringify(formData));
+    }
   };
 
   const resetForm = () => {
     localStorage.removeItem("kelvin_janine_rsvp");
     setSubmitted(false);
-  };
-
-  const getSmsUrl = () => {
-    const text = encodeURIComponent(
-      `Hello Kelvin! This is ${formData.name}. I am confirming my RSVP for your wedding on Dec 29, 2026. Status: ${
-        formData.attending === "attending" ? "Joyfully Attending" : "Regretfully Declining"
-      } (${formData.guests} seat/s).`
-    );
-    return `sms:+639959835850?body=${text}`;
   };
 
   return (
@@ -124,37 +147,77 @@ export default function Rsvp() {
               <div className="luxury-card rounded-3xl p-6 sm:p-10">
                 {submitted ? (
                   <div className="text-center py-6 animate-in fade-in duration-300">
-                    <div className="mx-auto w-16 h-16 rounded-full bg-[#f7ebe4] border border-[#bfa15f] flex items-center justify-center text-[#783832] shadow-sm mb-4">
+                    <div className="mx-auto w-16 h-16 rounded-full bg-[#f7ebe4] border border-[#bfa15f] flex items-center justify-center text-[#783832] shadow-sm mb-3">
                       <Check className="w-8 h-8 text-[#783832]" />
                     </div>
-                    <h3 className="font-cormorant text-3xl font-semibold text-[#783832]">
-                      RSVP Received, {formData.name}!
+
+                    <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-[11px] font-display uppercase tracking-widest bg-[#f7ebe4] text-[#783832] border border-[#bfa15f]/40 font-semibold mb-3">
+                      <Check className="w-3.5 h-3.5 text-[#bfa15f]" />
+                      Response Successfully Confirmed
+                    </span>
+
+                    <h3 className="font-cormorant text-3xl sm:text-4xl font-semibold text-[#783832]">
+                      Thank You, {formData.name}!
                     </h3>
-                    <p className="mt-2 font-serif text-base text-[#664338] leading-relaxed">
-                      {formData.attending === "attending"
-                        ? `Thank you for confirming! We look forward to celebrating with you (${formData.guests} seat/s reserved).`
-                        : "Thank you for letting us know. You will be missed, but we carry your love and prayers in our hearts!"}
+
+                    {/* Appreciation Message Validation Box */}
+                    <div className="mt-5 p-5 rounded-2xl bg-[#fdf8f5] border border-[#bfa15f]/30 text-left space-y-3">
+                      <div className="flex items-center gap-2 text-[#783832]">
+                        <Heart className="w-4 h-4 fill-[#d9aba6] text-[#bfa15f]" />
+                        <span className="font-display text-xs font-semibold uppercase tracking-wider">
+                          A Message of Gratitude
+                        </span>
+                      </div>
+
+                      <p className="font-serif text-sm sm:text-base text-[#5a2722] leading-relaxed italic">
+                        {formData.attending === "attending" ? (
+                          <>
+                            &ldquo;We are deeply touched and overjoyed that you will be sharing this sacred chapter of our lives with us. Having you celebrate our union before God and family means the world to us.&rdquo;
+                          </>
+                        ) : (
+                          <>
+                            &ldquo;Thank you so much for taking the time to send your response. Though we will truly miss your presence on our wedding day, your love, prayers, and warm wishes are deeply felt in our hearts.&rdquo;
+                          </>
+                        )}
+                      </p>
+
+                      <div className="pt-3 border-t border-[#bfa15f]/20 flex flex-wrap items-center justify-between gap-2 text-xs font-serif text-[#8b685e]">
+                        <span>
+                          Reserved:{" "}
+                          <strong className="text-[#783832]">
+                            {formData.guests} {formData.guests === "1" ? "Seat" : "Seats"}
+                          </strong>
+                        </span>
+                        <span>
+                          Status:{" "}
+                          <strong className="text-[#783832]">
+                            {formData.attending === "attending" ? "Attending" : "Regretfully Declined"}
+                          </strong>
+                        </span>
+                        {formData.phone && (
+                          <span>
+                            Contact: <strong className="text-[#783832]">{formData.phone}</strong>
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    <p className="mt-4 font-script text-3xl text-[#783832]">
+                      Kelvin &amp; Janine
                     </p>
 
-                    <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
-                      <a
-                        href={getSmsUrl()}
-                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-display text-xs font-semibold uppercase tracking-[0.15em] bg-[#783832] text-white hover:bg-[#5a2722] transition-colors shadow-sm"
-                      >
-                        <MessageCircle className="w-4 h-4 text-[#e0ca92]" />
-                        Send Confirmation via SMS
-                      </a>
+                    <div className="mt-6 flex items-center justify-center">
                       <button
                         onClick={resetForm}
                         type="button"
-                        className="w-full sm:w-auto px-5 py-3 rounded-full font-display text-xs font-semibold uppercase tracking-[0.15em] bg-white border border-[#bfa15f]/50 text-[#783832] hover:bg-[#f7ebe4] transition-colors"
+                        className="px-6 py-2.5 rounded-full font-display text-xs font-semibold uppercase tracking-[0.15em] bg-white border border-[#bfa15f]/50 text-[#783832] hover:bg-[#f7ebe4] hover:border-[#bfa15f] transition-all shadow-xs"
                       >
-                        Edit Response
+                        Edit Your Response
                       </button>
                     </div>
 
                     <div className="mt-8 pt-6 border-t border-[#bfa15f]/20 text-xs text-[#8b685e] font-serif">
-                      For questions or seat updates, please message Kelvin at{" "}
+                      For questions or seat updates, please contact Kelvin at{" "}
                       <a href={phoneHref} className="text-[#783832] font-semibold underline">
                         {phone}
                       </a>
@@ -279,9 +342,17 @@ export default function Rsvp() {
                     {/* Submit Button */}
                     <button
                       type="submit"
-                      className="w-full py-3.5 px-6 rounded-full font-display text-xs font-semibold uppercase tracking-[0.2em] bg-gradient-to-r from-[#783832] to-[#a66a64] text-white shadow-md hover:shadow-xl hover:from-[#5a2722] hover:to-[#8f423d] transition-all transform hover:-translate-y-0.5 border border-[#bfa15f]/60 mt-2"
+                      disabled={isSubmitting}
+                      className="w-full py-3.5 px-6 rounded-full font-display text-xs font-semibold uppercase tracking-[0.2em] bg-gradient-to-r from-[#783832] to-[#a66a64] text-white shadow-md hover:shadow-xl hover:from-[#5a2722] hover:to-[#8f423d] transition-all transform hover:-translate-y-0.5 border border-[#bfa15f]/60 mt-2 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
                     >
-                      Submit RSVP
+                      {isSubmitting ? (
+                        <>
+                          <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          <span>Recording RSVP...</span>
+                        </>
+                      ) : (
+                        <span>Submit RSVP</span>
+                      )}
                     </button>
 
                     {/* Contact info fallback */}

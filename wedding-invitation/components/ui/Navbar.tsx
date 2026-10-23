@@ -10,7 +10,6 @@ const links = [
   { href: "#details", label: "Details" },
   { href: "#dress-code", label: "Dress Code" },
   { href: "#entourage", label: "Entourage" },
-  { href: "#rsvp", label: "RSVP" },
 ];
 
 export default function Navbar() {

@@ -7,19 +7,21 @@ export const parents = {
 
 // Principal Sponsors (Godparents / Witnesses to Sacred Vows)
 export const principalSponsors: { male: string; female: string }[] = [
-  { male: "Mr. Bernardo Eseo", female: "Mrs. Myrna Felix" },
-  { male: "Mr. Meljune Foster", female: "Mrs. Helen Lagurin" },
-  { male: "Mr. Alvin Nuevo", female: "Mrs. Aireen Nuevo" },
-  { male: "Mr. Federick Marcelleana", female: "Mrs. Gelli Marcelleana" },
-  { male: "Mr. Jeffrey", female: "Mrs. Juliet Isiderio" },
-  { male: "Mr. Michael Tolentino", female: "Mrs. Grace Tolentino" },
+  { male: "Mr. Bernardo Eseo", female: "Ms. Myrna Felix" },
+  { male: "Mr. Meljune Foster", female: "Ms. Helen Lagurin" },
+  { male: "Mr. Alvin Nuevo", female: "Ms. Aireen Nuevo" },
+  { male: "Mr. Federick Marcelleana", female: "Ms. Gelli Marcelleana" },
+  { male: "Mr. Jeffrey Vidal", female: "Ms. Juliet Isiderio" },
+  { male: "Mr. Michael Tolentino", female: "Ms. Grace Tolentino" },
+  { male: "Mr. Marlon Barrun", female: "Ms. Myra De Guzman" },
+  { male: "Mr. Roger Niño", female: "Ms. Herminia Niño" },
 ];
 
 export const secondary = {
   bestMan: "Mr. Jemar Abordo",
   maidOfHonor: "Ms. Raquel Consulta",
   groomsmen: [
-    "Mr. Jaycee Arellano",
+    "Mr. Jayvee Arellano",
     "Mr. Rowel Saludo",
     "Mr. John Renz Sacueza",
     "Mr. Wilkens Panganiban",
