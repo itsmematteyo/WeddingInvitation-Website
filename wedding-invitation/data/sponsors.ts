@@ -13,9 +13,9 @@ export const principalSponsors: { male: string; female: string }[] = [
   { male: "Mr. Federick Marcelleana", female: "Mrs. Jilly Marcelleana" },
   { male: "Mr. Jeffrey Vidal", female: "Mrs. Juliet Isiderio" },
   { male: "Mr. Michael Tolentino", female: "Mrs. Grace Tolentino" },
-  { male: "Mr. Marlon Barrun", female: "Mrs. Myra De Guzman" },
+  { male: "Mr. Marlon Barrun", female: "Mrs. Merly Barrun" },
   { male: "Mr. Roger Niño", female: "Mrs. Herminia Niño" },
-  { male: "Mr. Genesis Pascor", female: "" },
+  { male: "Mr. Genesis Pascor", female: "Mrs. Myra De Guzman" },
 ];
 
 export const secondary = {

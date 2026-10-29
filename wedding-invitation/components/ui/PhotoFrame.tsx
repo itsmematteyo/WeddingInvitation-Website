@@ -9,6 +9,7 @@ type Props = {
   className?: string;
   shape?: "arch" | "rectangle" | "oval" | "soft-arch";
   objectPosition?: string;
+  imageStyle?: React.CSSProperties;
   priority?: boolean;
 };
 
@@ -20,6 +21,7 @@ export default function PhotoFrame({
   className = "aspect-[3/4]",
   shape = "arch",
   objectPosition = "object-center",
+  imageStyle,
   priority = false,
 }: Props) {
   // Always default to test-image if src is empty or null
@@ -53,6 +55,7 @@ export default function PhotoFrame({
               priority={priority}
               sizes="(min-width: 1024px) 50vw, 100vw"
               className={`object-cover transition-transform duration-700 group-hover:scale-105 ${objectPosition}`}
+              style={imageStyle}
             />
           ) : (
             <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center select-none">
