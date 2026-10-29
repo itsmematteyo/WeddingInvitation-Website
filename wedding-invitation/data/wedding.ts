@@ -14,7 +14,7 @@ export const wedding = {
   dayLabel: "Tuesday",
   timeLabel: "9:30 AM",
   arrivalNote:
-    "We recommend arriving by 9:20 AM or Before 9:30 AM so you have ample time to settle in and share in our moments before the processional begins.",
+    "We recommend arriving by 9:20 AM or Before 10:00 AM so you have ample time to settle in and share in our moments before the processional begins.",
   // Philippine Standard Time (UTC+8)
   isoDateTime: "2026-12-29T09:30:00+08:00",
   hashtag: "#InGodsPerfectTime #KelvinAndJanine2026",
