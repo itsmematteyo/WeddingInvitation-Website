@@ -33,9 +33,9 @@ export function MonogramCrest({
   size?: "sm" | "md" | "lg";
 }) {
   const sizeClasses = {
-    sm: "w-16 h-16 text-lg",
-    md: "w-24 h-24 text-2xl",
-    lg: "w-32 h-32 text-3xl",
+    sm: "w-16 h-16 text-sm",
+    md: "w-24 h-24 text-[21px]",
+    lg: "w-32 h-32 text-2xl",
   };
 
   return (
@@ -45,8 +45,10 @@ export function MonogramCrest({
         className={`${sizeClasses[size]} relative rounded-full border border-[#bfa15f]/50 p-1 flex items-center justify-center bg-white/70 shadow-sm backdrop-blur-sm`}
       >
         <div className="w-full h-full rounded-full border border-dashed border-[#bfa15f]/70 flex items-center justify-center">
-          <span className="font-script text-[#783832] font-semibold tracking-wider select-none">
-            K &amp; J
+          <span className="font-script text-[#783832] font-semibold select-none whitespace-nowrap leading-none flex items-center justify-center">
+            <span className="inline-block">K</span>
+            <span className="inline-block ml-0.5 sm:ml-1 mr-0 text-[0.88em] opacity-90">&amp;</span>
+            <span className="inline-block -ml-1 sm:-ml-1.5">J</span>
           </span>
         </div>
       </div>

@@ -10,7 +10,7 @@ import { X, ZoomIn } from "lucide-react";
 const photos = [
   {
     id: 1,
-    src: "/images/image-4.jpg",
+    src: "/images/image-13.jpg",
     alt: "Kelvin and Janine walking under evening lights",
     caption: "Until I found you — Stephen Sanchez",
     shape: "rectangle" as const,
@@ -50,7 +50,7 @@ const photos = [
   },
   {
     id: 5,
-    src: "/images/image-6.jpg",
+    src: "/images/image-11.jpg",
     alt: "Kelvin and Janine close embrace and laughter",
     caption: "Joy that overflows",
     shape: "rectangle" as const,

@@ -16,7 +16,6 @@ export async function POST(request: Request) {
       process.env.GOOGLE_SCRIPT_URL ||
       process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL;
 
-    // If Google Apps Script Web App URL is configured, forward the data
     if (scriptUrl) {
       try {
         const response = await fetch(scriptUrl, {

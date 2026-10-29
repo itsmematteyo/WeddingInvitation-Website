@@ -119,13 +119,13 @@ export default function WeddingDetails() {
           <div className="mx-auto mt-10 w-full max-w-md sm:max-w-lg">
             <ScrollReveal animation="zoom-in" delayMs={140}>
               <PhotoFrame
-                src="/images/image-9.jpg"
+                src="/images/image.jpg"
                 alt="Kelvin and Janine"
                 label="Kelvin & Janine"
                 caption="San Pablo Cathedral & Golden Rich"
-                className="aspect-[4/5] sm:aspect-[3/4] min-h-[420px] sm:min-h-[500px]"
+                className="aspect-[5/10] sm:aspect-[6/5] min-h-[200px] sm:min-h-[400px]"
                 shape="arch"
-                objectPosition="object-[center_15%]"
+                objectPosition="object-[center_5%]"
               />
             </ScrollReveal>
           </div>

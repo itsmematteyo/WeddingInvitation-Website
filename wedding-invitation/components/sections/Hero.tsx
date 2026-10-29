@@ -8,7 +8,6 @@ import Countdown from "@/components/animations/Countdown";
 import PhotoFrame from "@/components/ui/PhotoFrame";
 import { Calendar, MapPin, ChevronDown } from "lucide-react";
 
-// Featured couple image in public/images
 const HERO_SRC: string | null = "/images/image-2.jpg";
 
 export default function Hero() {
