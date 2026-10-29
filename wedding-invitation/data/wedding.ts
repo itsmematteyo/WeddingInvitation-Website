@@ -14,7 +14,7 @@ export const wedding = {
   dayLabel: "Tuesday",
   timeLabel: "9:30 AM",
   arrivalNote:
-    "We recommend arriving by 9:00 AM or Before 9:30 AM so you have ample time to settle in and share in our moments before the processional begins.",
+    "We recommend arriving by 9:20 AM or Before 9:30 AM so you have ample time to settle in and share in our moments before the processional begins.",
   // Philippine Standard Time (UTC+8)
   isoDateTime: "2026-12-29T09:30:00+08:00",
   hashtag: "#InGodsPerfectTime #KelvinAndJanine2026",
@@ -24,7 +24,7 @@ export const wedding = {
       name: "San Pablo Cathedral Church",
       address: "San Pablo City, Laguna",
       time: "10:00 AM",
-      arrival: "9:00 AM or Before 9:30 AM",
+      arrival: "9:20 AM or Before 9:30 AM",
       description: "Cathedral Parish of Saint Paul the First Hermit — Where we seal our sacred vows before God and family.",
       googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=San+Pablo+Cathedral+Church+San+Pablo+City+Laguna",
       wazeUrl: "https://waze.com/ul?q=San+Pablo+Cathedral+Laguna",
